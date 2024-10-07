@@ -196,27 +196,8 @@ cropped_dat = dat[Min:Max, :] # [y좌표, x좌표표]
 # plt.show()
 ##################################################################
 
-# 두 직선 사이의 영역만 유지, 나머지는 0으로
-modified_dat = np.zeros_like(cropped_dat)
-
-# 새로운 이미지에 맞춰 값 조정
-new_height, new_width = cropped_dat.shape # 이미지 크기 변동
-new_intercept1 = intercept1 - Min # line1의 y절편 변동
-new_intercept2 = intercept2 - Min # line2의 y절편 변동
-
-# 이미지의 각 픽셀을 판별(직선 안에 있는지)
-for y in range(new_height):
-    for x in range(new_width):
-        # 각 직선 위의 y 좌표를 계산
-        line1 = slope1 * x + new_intercept1
-        line2 = slope2 * x + new_intercept2
-            
-        # 해당 픽셀이 두 직선 사이에 있는지 확인
-        if min(line1, line2) <= y <= max(line1, line2):
-            modified_dat[y, x] = cropped_dat[y, x]  # 두 직선 사이에 있는 데이터만 유지
-
 # 새로운 FITS 파일 저장
-hdu = fits.PrimaryHDU(np.array(modified_dat))
+hdu = fits.PrimaryHDU(np.array(cropped_dat))
 hdul_new = fits.HDUList([hdu])
 hdul_new.writeto(output_fits_file, overwrite=True)
     
