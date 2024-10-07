@@ -163,20 +163,18 @@ slope2, intercept2 = line_calc(l_x, l2_y, r_x, r2_y)
 # 출력 파일 경로
 output_fits_file = 'detected_Flat-001.fits'
 
-# 필요한 데이터에서 가장 크고, 가장 작은 y값을 추출(이미지를 자르기 위함)
-# 이미지의 양 끝에서 피크값을 뽑은 것이 아니므로 직선과 이미지 가장자리의 교점의 좌표를 구해서 추출했음
+# 필요한 데이터에서 이미지를 자르기 위한 y값을 추출
 def calculate_y(height, width, slope1, intercept1, slope2, intercept2):
     # line1과 line2의 x좌표를 0과 width로 설정하여 y좌표 계산
     y1_start = slope1 * 0 + intercept1  # x = 0
     y1_end = slope1 * width + intercept1  # x = width
     
     y2_start = slope2 * 0 + intercept2  # x = 0
-    y2_end = slope2 * width + intercept트
-    y_coords = [y1_start, y1_end, y2_start, y2_end]
+    y2_end = slope2 * width + intercept2  # x = width
 
     # y좌표 중에서 최대값과 최소값을 계산
-    y_max = max(y_coords)
-    y_min = min(y_coords)
+    y_min = max([y1_start, y1_end])
+    y_max = min([y2_start, y2_end])
 
     return y_max, y_min
 
