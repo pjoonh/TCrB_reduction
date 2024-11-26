@@ -18,8 +18,7 @@ import numpy as np
 
 
 # parameter
-# base_path = 'C:/obsdata'    # file path
-base_path = "C:/Users/joonh/MDFTS"
+base_path = 'C:/obsdata'    # file path
 obsdate = '20240828'
 dW = 10                     # image crop
 shift = 1500
