@@ -20,9 +20,8 @@ import numpy as np
 
 
 # parameter
-# base_path = 'C:/obsdata'    # file path
-base_path = "C:/Users/joonh/Desktop"
-obsdate = '20250223_1'
+# base_path = 'C:/obsdata'    # file path ex)'C:/Users/OOO/Desktop'
+obsdate = '20250223'
 dW = 10                     # image crop
 shift = 1500
 sigma = 2                   # gaussian smoothing
@@ -50,7 +49,7 @@ extract_fwhm_multiple_bg_outer = 6
 extract_fwhm_multiple_spec_radius = 3
 #######################################################################################
 # CheckingOnOff = input('Do you want to check each course?(Y/N): ')
-CheckingOnOff = 'N'
+# CheckingOnOff = 'N' # 과정별로 멈추고 싶을 때 Y 입력력
 
 # 1. image classification
 parent_folder, new_folder_path = spf.cr8fld(base_path, obsdate) # create folder(spec20240627)
@@ -223,16 +222,4 @@ for img_type in ['piser','tcrb']:
     #                                                                   search_range=20, plotCheck_resolution=False, plotCheck_sigma=True)    
     print(f'Finished : {img_type}')
 print('Arc Wavelength calibrations are completed.')
-
-
-# arc에 따라 piser, tcrb calibration
-for img_type in ['piser','tcrb']:
-    
-    print(f'Finished : {img_type}')
-print('Stars Wavelength calibrations are completed.')
-print('=========================process09=========================')
-if CheckingOnOff == 'Y':
-    check08 = input('Checking Process 09(Please enter anything): ')
-else:
-    pass
 
